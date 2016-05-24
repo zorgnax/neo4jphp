@@ -123,6 +123,7 @@ function neo4j_exec ($nh, $query, $params = null) {
     if (!$response) {
         throw new Exception(curl_error($ch));
     }
+    curl_close($ch);
     $response2 = neo4j_parse_response($response);
     if ($nh["debug"]) {
         error_log(json_encode($response2, JSON_PRETTY_PRINT));
