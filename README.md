@@ -24,11 +24,13 @@ Place neo4j.php into a folder. then in the script that wants to use it:
 INTERFACE
 =========
 
-* neo4j_init($host, $port, $user, $pass, $debug)
+neo4j_init($host, $port, $user, $pass, $debug)
+----------------------------------------------
 
 Sets the variables needed for connecting to a Neo4j server. Returns a handle which can be sent to neo4j_exec(). If you use the $debug argument, all requests and responses are printed to the error log (STDERR on command line).
 
-* neo4j_exec($nh, $query, $params = null)
+neo4j_exec($nh, $query, $params = null)
+---------------------------------------
 
 Executes a cypher query on the Neo4j handle provided by $nh. If you provide the params argument, they can be used in the query. Returns the results as a table. On error, it will raise an exception. The names of the columns of the resulting table are stored in a global variable $neo4jColumns. The response is also stored in global variable $neo4jData. The format of the response is an array of arrays. Each row is an array of its columns. the metadata for nodes is combined into the associative array prefixed with a underscore. For example, this query:
 
@@ -59,15 +61,18 @@ Might return results that are formatted like this:
         ],
     ]
 
-* neo4j_query($query, $params = null)
+neo4j_query($query, $params = null)
+-----------------------------------
 
 This is the same as neo4j_exec(), except it gets the Neo4j handle from the last call to neo4j_init().
 
-* neo4j_quote($variable)
+neo4j_quote($var)
+-----------------
 
 Quotes a variable for use in a cypher query. For example, "foo" becomes "\"foo\"". 23 becomes "23". null becomes "NULL".
 
-* neo4j_prep($query, $var1, $var2, ..., $varn)
+neo4j_prep($query, $var1, $var2, ..., $varn)
+--------------------------------------------
 
 Replaces ? inside of query with the quoted version of $var1 ... $varn. For example:
 
